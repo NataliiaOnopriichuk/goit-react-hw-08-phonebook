@@ -1,3 +1,5 @@
+import { Container } from '@mui/material';
+import ResponsiveAppBar from 'components/AppBar/AppBar';
 import { Loader } from 'components/Loader/Loader';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,22 +21,28 @@ export const App = () => {
   if (error) return <p>Download error</p>;
 
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        fontSize: 30,
-        color: '#010101',
-      }}
-    >
-      <h1>Phonebook</h1>
-      <ContactForm />
+    <>
+      <ResponsiveAppBar />
+      <Container maxWidth="sm">
+        <h1>Phonebook</h1>
+        <ContactForm />
 
-      <h2>Contacts</h2>
-      <Filter />
-      {isLoading ? <Loader /> : <ContactList />}
-    </div>
+        <h2>Contacts</h2>
+        <Filter />
+        {isLoading ? <Loader /> : <ContactList />}
+      </Container>
+    </>
+    // <div
+    //   style={{
+    //     height: '100vh',
+    //     display: 'flex',
+    //     flexDirection: 'column',
+    //     alignItems: 'center',
+    //     fontSize: 30,
+    //     color: '#010101',
+    //   }}
+    // >
+
+    // </div>
   );
 };
