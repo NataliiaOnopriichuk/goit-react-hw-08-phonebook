@@ -1,48 +1,18 @@
-import { Container } from '@mui/material';
 import ResponsiveAppBar from 'components/AppBar/AppBar';
-import { Loader } from 'components/Loader/Loader';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts } from 'redux/contacts/operation.contacts';
-import { selectorContacts, selectorFilter } from 'redux/selectors';
-import { ContactForm } from '../ContactForm/ContactForm';
-import { ContactList } from '../ContactList/ContactList';
-import { Filter } from '../Filter/Filter';
+import { Contacts } from 'pages/Contacts';
+import { Login } from 'pages/Login';
+import { Register } from 'pages/Register';
+import { Route, Routes } from 'react-router-dom';
 
 export const App = () => {
-  const dispatch = useDispatch();
-  const search = useSelector(selectorFilter);
-  const { isLoading, error } = useSelector(selectorContacts);
-
-  useEffect(() => {
-    dispatch(fetchContacts(search));
-  }, [dispatch, search]);
-
-  if (error) return <p>Download error</p>;
-
   return (
     <>
       <ResponsiveAppBar />
-      <Container maxWidth="sm">
-        <h1>Phonebook</h1>
-        <ContactForm />
-
-        <h2>Contacts</h2>
-        <Filter />
-        {isLoading ? <Loader /> : <ContactList />}
-      </Container>
+      <Routes>
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/contacts" element={<Contacts />} />
+      </Routes>
     </>
-    // <div
-    //   style={{
-    //     height: '100vh',
-    //     display: 'flex',
-    //     flexDirection: 'column',
-    //     alignItems: 'center',
-    //     fontSize: 30,
-    //     color: '#010101',
-    //   }}
-    // >
-
-    // </div>
   );
 };

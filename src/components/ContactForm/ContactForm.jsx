@@ -38,12 +38,10 @@ export const ContactForm = memo(() => {
       >
         <TextField
           required
-          // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           id="outlined-required"
           label="Name"
           name="name"
           defaultValue=" "
-          // inputProps={{ inputMode: 'string', pattern: '[a-zA-Zа-яА-Я]*' }}
           // value={name}
           // onChange={event => {
           //   setName(event.target.value);
@@ -52,9 +50,8 @@ export const ContactForm = memo(() => {
         <TextField
           required
           id="outlined-required"
-          label="Number"
+          label="number"
           name="number"
-          // inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
           defaultValue=" "
         />
         <Button variant="contained" type="submit" size="medium">

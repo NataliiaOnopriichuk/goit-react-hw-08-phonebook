@@ -13,6 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
+import { Link } from 'react-router-dom';
 
 // const pages = ['Contacts', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Logout'];
@@ -107,7 +108,19 @@ function ResponsiveAppBar() {
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
-              Contacts
+              <Link to="/contacts">Contacts</Link>
+            </Button>
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+            >
+              <Link to="/register">Register</Link>
+            </Button>
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+            >
+              <Link to="/login">Login</Link>
             </Button>
           </Box>
 
