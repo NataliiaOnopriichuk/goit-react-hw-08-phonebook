@@ -10,17 +10,14 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { registerUserApi } from 'service/contacts';
-// import { createTheme } from '@mui/material/styles';
+import { registerUserApi } from 'service/authApi/authApi';
 
-// const theme = createTheme();
-const formInitialState = { name: '', email: '', password: '' };
+const formInitialState = { name: '', password: '', email: '' };
 
 export const Register = () => {
   const [form, setForm] = useState(formInitialState);
 
   const handleChange = event => {
-    event.preventDefault();
     const { name, value } = event.target;
     setForm(prev => ({ ...prev, [name]: value }));
   };
@@ -52,37 +49,37 @@ export const Register = () => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                autoComplete="given-name"
-                name="name"
                 value={form.name}
                 onChange={handleChange}
+                autoComplete="given-name"
+                name="name"
                 required
                 fullWidth
-                id="name"
-                label="name"
+                id="firstName"
+                label="Name"
                 autoFocus
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
+                value={form.email}
+                onChange={handleChange}
                 required
                 fullWidth
                 id="email"
-                label="email"
+                label="Email Address"
                 name="email"
-                value={form.email}
-                onChange={handleChange}
                 autoComplete="email"
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                required
-                fullWidth
                 value={form.password}
                 onChange={handleChange}
+                required
+                fullWidth
                 name="password"
-                label="password"
+                label="Password"
                 type="password"
                 id="password"
                 autoComplete="new-password"
@@ -99,7 +96,10 @@ export const Register = () => {
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link to="/login" variant="body2">
+              <Link
+                to="/login"
+                style={{ textDecoration: 'underline', fontSize: '14px' }}
+              >
                 Already have an account? Sign in
               </Link>
             </Grid>

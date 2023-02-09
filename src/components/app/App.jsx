@@ -1,17 +1,35 @@
-import ResponsiveAppBar from 'components/AppBar/AppBar';
+import { Layout } from 'components/Layout/Layout/Layout';
 import { Contacts } from 'pages/Contacts';
 import { Login } from 'pages/Login';
 import { Register } from 'pages/Register';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { routes } from 'routes';
 
 export const App = () => {
+  const isAuth = false;
   return (
     <>
-      <ResponsiveAppBar />
       <Routes>
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/contacts" element={<Contacts />} />
+        <Route path="/" element={<Layout />}>
+          {isAuth ? (
+            <Route path={routes.CONTACTS} element={<Contacts />} />
+          ) : (
+            <>
+              <Route path={routes.REGISTER} element={<Register />} />
+              <Route path={routes.LOGIN} element={<Login />} />
+            </>
+          )}
+          <Route
+            path="*"
+            element={
+              isAuth ? (
+                <Navigate to={routes.CONTACTS} />
+              ) : (
+                <Navigate to={routes.LOGIN} />
+              )
+            }
+          />
+        </Route>
       </Routes>
     </>
   );

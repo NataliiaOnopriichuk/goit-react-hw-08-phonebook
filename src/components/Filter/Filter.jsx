@@ -11,18 +11,11 @@ export const Filter = () => {
   return (
     <TextField
       id="outlined-textarea"
+      type="text"
       label="Find contacts by name"
       name="filter"
       onChange={event => dispatch(changeFilter(event.target.value))}
       multiline
     />
-    // <label className={css.label}>
-    //   Find contacts by name
-    //   <input
-    //     type="text"
-    //     name="filter"
-    //     onChange={event => dispatch(changeFilter(event.target.value))}
-    //   />
-    // </label>
   );
 };

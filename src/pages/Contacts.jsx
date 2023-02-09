@@ -1,9 +1,8 @@
-import { Filter } from '@mui/icons-material';
-import { Container } from '@mui/material';
+import { Box, Container, Paper } from '@mui/material';
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import { ContactList } from 'components/ContactList/ContactList';
+import { Filter } from 'components/Filter/Filter';
 import { Loader } from 'components/Loader/Loader';
-
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from 'redux/contacts/operation.contacts';
@@ -21,27 +20,39 @@ export const Contacts = () => {
   if (error) return <p>Download error</p>;
 
   return (
-    <>
-      <Container maxWidth="sm">
-        <h1>Phonebook</h1>
-        <ContactForm />
-
+    <Container maxWidth="sm">
+      <Box
+        sx={{
+          p: '20px 0',
+        }}
+      >
+        <Paper
+          elevation={3}
+          sx={{
+            p: '20px 20px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '20px',
+            textAlign: 'center',
+          }}
+        >
+          <h1>Phonebook</h1>
+          <ContactForm />
+        </Paper>
+      </Box>
+      <Box
+        sx={{
+          p: '20px 0',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '20px',
+          textAlign: 'center',
+        }}
+      >
         <h2>Contacts</h2>
         <Filter />
         {isLoading ? <Loader /> : <ContactList />}
-      </Container>
-    </>
-    // <div
-    //   style={{
-    //     height: '100vh',
-    //     display: 'flex',
-    //     flexDirection: 'column',
-    //     alignItems: 'center',
-    //     fontSize: 30,
-    //     color: '#010101',
-    //   }}
-    // >
-
-    // </div>
+      </Box>
+    </Container>
   );
 };
