@@ -7,11 +7,13 @@ import Button from '@mui/material/Button';
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 import { Link } from 'react-router-dom';
 import { routes } from 'routes';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectorAuth } from 'redux/selectors';
+import { logoutUser } from 'redux/Auth/operation.auth';
 
 function ResponsiveAppBar() {
-  const { isAuth } = useSelector(selectorAuth);
+  const dispatch = useDispatch();
+  const { token } = useSelector(selectorAuth);
 
   return (
     <AppBar position="static">
@@ -29,7 +31,7 @@ function ResponsiveAppBar() {
             component="ul"
             sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}
           >
-            {isAuth ? (
+            {token ? (
               <>
                 <Button
                   component="li"
@@ -38,6 +40,9 @@ function ResponsiveAppBar() {
                   <Link to={routes.CONTACTS}>Contacts</Link>
                 </Button>{' '}
                 <Button
+                  onClick={() => {
+                    dispatch(logoutUser());
+                  }}
                   component="li"
                   sx={{
                     my: 2,

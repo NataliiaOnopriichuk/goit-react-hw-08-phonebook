@@ -1,25 +1,27 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginUser, registerUser } from './operation.auth';
+import {
+  getCurrentUser,
+  loginUser,
+  logoutUser,
+  registerUser,
+} from './operation.auth';
+
+const authInitialState = {
+  token: null,
+  isLoading: false,
+  error: null,
+  user: {
+    email: '',
+    name: '',
+  },
+};
 
 const authSlice = createSlice({
   name: 'auth',
-  initialState: {
-    isAuth: false,
-    token: null,
-    // localId: null,
-    // refreshToken: null,
-    isLoading: false,
-    error: null,
-    user: {
-      email: '',
-      name: '',
-    },
-  },
+  initialState: authInitialState,
   extraReducers: builder => {
     builder
       .addCase(registerUser.fulfilled, (state, { payload }) => {
-        console.log('payload :>> ', payload);
-        console.log('state :>> ', state);
         return {
           ...state,
           ...payload,
@@ -32,6 +34,16 @@ const authSlice = createSlice({
           ...payload,
           isAuth: true,
         };
+      })
+      .addCase(getCurrentUser.fulfilled, (state, { payload }) => {
+        return {
+          ...state,
+          user: { ...payload },
+          isAuth: true,
+        };
+      })
+      .addCase(logoutUser.fulfilled, () => {
+        return authInitialState;
       })
       .addMatcher(
         action =>

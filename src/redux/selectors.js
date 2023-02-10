@@ -7,6 +7,7 @@ export const selectorAuth = (state) => state.auth
 
 
 
+
 export const filterContactsByName = createSelector([selectorContacts, selectorFilter], (contacts, filter) => {
     return contacts.items.filter(({ name }) =>
       name.toLowerCase().includes(filter.toLowerCase().trim())

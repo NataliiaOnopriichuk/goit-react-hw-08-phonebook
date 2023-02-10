@@ -1,28 +1,31 @@
-import axios from "axios";
-import { privateApi } from "http";
-import { publicApi } from "http";
-
+import { privateApi, publicApi} from "http";
 
 export const registerUserApi = async body => {
-  const { data } = await axios.post(
-    'https://connections-api.herokuapp.com/users/signup',
+  const { data } = await publicApi.post(
+    'users/signup',
     body
   );
-    console.log('data :>> ', data);
   return data;
 };
 
 export const loginUserApi = async body => {
   const { data } = await publicApi.post(
-    'https://connections-api.herokuapp.com/users/login',
+    'users/login',
     body
-  );
+  )
   return data;
 };
 
 export const getCurrentUserApi = async () => {
   const { data } = await privateApi.get(
-    'https://connections-api.herokuapp.com/users/current'
+    'users/current'
+  );
+  return data;
+};
+
+export const logoutApi = async () => {
+  const { data } = await privateApi.post(
+    'users/logout'
   );
   return data;
 };
