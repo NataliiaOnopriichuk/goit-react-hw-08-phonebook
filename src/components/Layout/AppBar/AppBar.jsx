@@ -7,9 +7,12 @@ import Button from '@mui/material/Button';
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 import { Link } from 'react-router-dom';
 import { routes } from 'routes';
+import { useSelector } from 'react-redux';
+import { selectorAuth } from 'redux/selectors';
 
 function ResponsiveAppBar() {
-  const isAuth = false;
+  const { isAuth } = useSelector(selectorAuth);
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">

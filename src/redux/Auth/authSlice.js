@@ -1,44 +1,61 @@
-// import { createSlice } from '@reduxjs/toolkit';
-// import { addContact, deleteContact, fetchContacts } from './operation.contacts';
+import { createSlice } from '@reduxjs/toolkit';
+import { loginUser, registerUser } from './operation.auth';
 
-// const authInitialState = {
-//   i: ''
-// };
+const authSlice = createSlice({
+  name: 'auth',
+  initialState: {
+    isAuth: false,
+    token: null,
+    // localId: null,
+    // refreshToken: null,
+    isLoading: false,
+    error: null,
+    user: {
+      email: '',
+      name: '',
+    },
+  },
+  extraReducers: builder => {
+    builder
+      .addCase(registerUser.fulfilled, (state, { payload }) => {
+        console.log('payload :>> ', payload);
+        console.log('state :>> ', state);
+        return {
+          ...state,
+          ...payload,
+          isAuth: true,
+        };
+      })
+      .addCase(loginUser.fulfilled, (state, { payload }) => {
+        return {
+          ...state,
+          ...payload,
+          isAuth: true,
+        };
+      })
+      .addMatcher(
+        action =>
+          action.type.startsWith('auth/') && action.type.endsWith('/pending'),
+        state => {
+          state.isLoading = true;
+        }
+      )
+      .addMatcher(
+        action =>
+          action.type.startsWith('auth/') && action.type.endsWith('/fulfilled'),
+        state => {
+          state.isLoading = false;
+        }
+      )
+      .addMatcher(
+        action =>
+          action.type.startsWith('auth/') && action.type.endsWith('/rejected'),
+        (state, { payload }) => {
+          state.isLoading = false;
+          state.error = payload;
+        }
+      );
+  },
+});
 
-// const authSlice = createSlice({
-//   name: 'auth',
-//   initialState: authInitialState,
-//   extraReducers: builder => {
-//     builder
-//       .addCase(fetchContacts.fulfilled, (state, { payload }) => {
-//         state.isLoading = false;
-//         state.items = payload;
-//       })
-//       .addCase(addContact.fulfilled, (state, { payload }) => {
-//         state.isLoading = false;
-//         state.items.push(payload);
-//       })
-//       .addCase(deleteContact.fulfilled, (state, { payload }) => {
-//         state.isLoading = false;
-//         state.items = state.items.filter(el => el.id !== payload);
-//       })
-//       .addMatcher(
-//         action =>
-//           action.type.startsWith('contacts') && action.type.endsWith('pending'),
-//         state => {
-//           state.isLoading = true;
-//         }
-//       )
-//       .addMatcher(
-//         action =>
-//           action.type.startsWith('contacts') &&
-//           action.type.endsWith('rejected'),
-//         (state, { payload }) => {
-//           state.isLoading = false;
-//           state.error = payload;
-//         }
-//       );
-//   },
-// });
-
-// export const authReducer = authSlice.reducer;
+export const authReducer = authSlice.reducer;

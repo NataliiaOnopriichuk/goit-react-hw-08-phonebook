@@ -10,12 +10,14 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { registerUserApi } from 'service/authApi/authApi';
+import { useDispatch } from 'react-redux';
+import { registerUser } from 'redux/Auth/operation.auth';
 
-const formInitialState = { name: '', password: '', email: '' };
+const formInitialState = { name: '', email: '', password: '' };
 
 export const Register = () => {
   const [form, setForm] = useState(formInitialState);
+  const dispatch = useDispatch();
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -24,8 +26,7 @@ export const Register = () => {
 
   const onSubmit = event => {
     event.preventDefault();
-    console.log('form :>> ', form);
-    registerUserApi(form);
+    dispatch(registerUser(form));
   };
 
   return (

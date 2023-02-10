@@ -2,11 +2,13 @@ import { Layout } from 'components/Layout/Layout/Layout';
 import { Contacts } from 'pages/Contacts';
 import { Login } from 'pages/Login';
 import { Register } from 'pages/Register';
+import { useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { selectorAuth } from 'redux/selectors';
 import { routes } from 'routes';
 
 export const App = () => {
-  const isAuth = false;
+  const { isAuth } = useSelector(selectorAuth);
   return (
     <>
       <Routes>

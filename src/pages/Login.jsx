@@ -7,16 +7,25 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { loginUser } from 'redux/Auth/operation.auth';
+
+const formInitialState = { email: '', password: '' };
 
 export const Login = () => {
-  //   const handleSubmit = event => {
-  //     event.preventDefault();
-  //     const data = new FormData(event.currentTarget);
-  //     console.log({
-  //       email: data.get('email'),
-  //       password: data.get('password'),
-  //     });
-  //   };
+  const [form, setForm] = useState(formInitialState);
+  const dispatch = useDispatch();
+
+  const handleChange = event => {
+    const { name, value } = event.target;
+    setForm(prev => ({ ...prev, [name]: value }));
+  };
+
+  const onSubmit = event => {
+    event.preventDefault();
+    dispatch(loginUser(form));
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -35,8 +44,10 @@ export const Login = () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <Box component="form" noValidate sx={{ mt: 1 }}>
+        <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={onSubmit}>
           <TextField
+            onChange={handleChange}
+            value={form.email}
             margin="normal"
             required
             fullWidth
@@ -47,6 +58,8 @@ export const Login = () => {
             autoFocus
           />
           <TextField
+            onChange={handleChange}
+            value={form.password}
             margin="normal"
             required
             fullWidth
