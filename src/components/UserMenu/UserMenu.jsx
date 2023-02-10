@@ -19,7 +19,10 @@ export const UserMenu = ({ email }) => {
         marginLeft: 'auto',
       }}
     >
-      <Typography sx={{ fontSize: '13px' }}>{email}</Typography>
+      <Typography sx={{ fontSize: '13px', color: '#94edff77' }}>
+        {email}
+      </Typography>
+
       <Button
         onClick={() => {
           dispatch(logoutUser());

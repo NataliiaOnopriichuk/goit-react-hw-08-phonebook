@@ -32,7 +32,7 @@ export const Contacts = () => {
     <Container maxWidth="sm">
       <Box
         sx={{
-          p: '20px 0',
+          p: '30px 0',
         }}
       >
         <Paper
@@ -43,24 +43,15 @@ export const Contacts = () => {
             flexDirection: 'column',
             gap: '20px',
             textAlign: 'center',
+            bgcolor: '#ffffff79',
           }}
         >
           <h1>Phonebook</h1>
           <ContactForm />
+          <h2>Contacts</h2>
+          <Filter />
+          {isLoading ? <Loader /> : <ContactList />}
         </Paper>
-      </Box>
-      <Box
-        sx={{
-          p: '20px 0',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '20px',
-          textAlign: 'center',
-        }}
-      >
-        <h2>Contacts</h2>
-        <Filter />
-        {isLoading ? <Loader /> : <ContactList />}
       </Box>
     </Container>
   );

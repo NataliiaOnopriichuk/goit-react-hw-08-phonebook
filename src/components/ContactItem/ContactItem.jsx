@@ -8,12 +8,17 @@ import DeleteIcon from '@mui/icons-material/Delete';
 export const ContactItem = ({ name, number, id }) => {
   const dispatch = useDispatch();
   return (
-    <Grid item component="li" sx={{ marginBottom: '15px' }}>
-      <Paper elevation={2} className={css.listItem}>
+    <Grid item component="li" sx={{ marginBottom: '15px', width: '100%' }}>
+      <Paper
+        elevation={2}
+        className={css.listItem}
+        sx={{ bgcolor: '#94edff41' }}
+      >
         <Typography sx={{ fontSize: '22px' }} variant="body1" component="p">
           {name}: {number}
         </Typography>
         <Button
+          className={css.btnDelete}
           variant="outlined"
           startIcon={<DeleteIcon />}
           type="button"
