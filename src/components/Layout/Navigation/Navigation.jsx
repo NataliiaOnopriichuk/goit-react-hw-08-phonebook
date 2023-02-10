@@ -7,17 +7,16 @@ import Button from '@mui/material/Button';
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 import { Link } from 'react-router-dom';
 import { routes } from 'routes';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectorAuth } from 'redux/selectors';
-import { logoutUser } from 'redux/Auth/operation.auth';
+import { UserMenu } from 'components/UserMenu/UserMenu';
 
-function ResponsiveAppBar() {
-  const dispatch = useDispatch();
-  const { token } = useSelector(selectorAuth);
+function Navigation() {
+  const { token, user } = useSelector(selectorAuth);
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
+      <Container maxWidth="md">
         <Toolbar component="nav" disableGutters>
           <ContactPhoneIcon
             fontSize="large"
@@ -29,7 +28,10 @@ function ResponsiveAppBar() {
           />
           <Box
             component="ul"
-            sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}
+            sx={{
+              flexGrow: 1,
+              display: 'flex',
+            }}
           >
             {token ? (
               <>
@@ -38,21 +40,8 @@ function ResponsiveAppBar() {
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
                   <Link to={routes.CONTACTS}>Contacts</Link>
-                </Button>{' '}
-                <Button
-                  onClick={() => {
-                    dispatch(logoutUser());
-                  }}
-                  component="li"
-                  sx={{
-                    my: 2,
-                    color: 'white',
-                    display: 'block',
-                    marginLeft: 'auto',
-                  }}
-                >
-                  Logout
                 </Button>
+                <UserMenu email={user.email} />
               </>
             ) : (
               <>
@@ -76,4 +65,4 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 }
-export default ResponsiveAppBar;
+export default Navigation;

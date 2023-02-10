@@ -5,13 +5,13 @@ import { deleteContact } from 'redux/contacts/operation.contacts';
 import { Button, Grid, Paper, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-export const ContactItem = ({ name, phone, id }) => {
+export const ContactItem = ({ name, number, id }) => {
   const dispatch = useDispatch();
   return (
     <Grid item component="li" sx={{ marginBottom: '15px' }}>
       <Paper elevation={2} className={css.listItem}>
         <Typography sx={{ fontSize: '22px' }} variant="body1" component="p">
-          {name}: {phone}
+          {name}: {number}
         </Typography>
         <Button
           variant="outlined"
@@ -30,6 +30,6 @@ export const ContactItem = ({ name, phone, id }) => {
 
 ContactItem.propTypes = {
   name: PropTypes.string.isRequired,
-  phone: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
 };

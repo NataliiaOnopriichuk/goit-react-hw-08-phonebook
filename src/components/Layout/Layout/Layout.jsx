@@ -1,12 +1,12 @@
 // import { Loader } from 'components/Loader/Loader';
 // import React, { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import ResponsiveAppBar from '../AppBar/AppBar';
+import Navigation from '../Navigation/Navigation';
 
 export const Layout = () => {
   return (
     <>
-      <ResponsiveAppBar />
+      <Navigation />
       <main>
         {/* <Suspense fallback={<Loader />}> */}
         <Outlet />

@@ -3,26 +3,30 @@ import TextField from '@mui/material/TextField';
 import { memo } from 'react';
 // import css from './ContactForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectorContacts } from 'redux/selectors';
+import { selectorAuth, selectorContacts } from 'redux/selectors';
 import { addContact } from 'redux/contacts/operation.contacts';
 import { Button } from '@mui/material';
+import { tokenId } from 'http';
 
 export const ContactForm = memo(() => {
-  // const [name, setName] = useState(' ');
   const dispatch = useDispatch();
   const stateContacts = useSelector(selectorContacts);
+  const { token, user } = useSelector(selectorAuth);
 
   const addContacts = event => {
     event.preventDefault();
     const name = event.target.elements.name.value;
-    const phone = event.target.elements.number.value;
+    const number = event.target.elements.number.value;
     if (
       stateContacts.items.some(
         el => el.name.toLowerCase().trim() === name.toLowerCase().trim()
       )
     )
       return alert(`${name} is already in contacts`);
-    dispatch(addContact({ name, phone }));
+    if (token && user.email) {
+      tokenId.set(token);
+    }
+    dispatch(addContact({ name, number }));
     event.target.reset();
   };
 
