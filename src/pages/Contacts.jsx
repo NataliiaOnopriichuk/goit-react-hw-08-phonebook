@@ -43,7 +43,7 @@ export const Contacts = () => {
             flexDirection: 'column',
             gap: '20px',
             textAlign: 'center',
-            bgcolor: '#ffffff79',
+            bgcolor: '#558bc820',
           }}
         >
           <h1>Phonebook</h1>

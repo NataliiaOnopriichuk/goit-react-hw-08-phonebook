@@ -12,7 +12,7 @@ export const ContactItem = ({ name, number, id }) => {
       <Paper
         elevation={2}
         className={css.listItem}
-        sx={{ bgcolor: '#94edff41' }}
+        sx={{ bgcolor: '#8cbff860' }}
       >
         <Typography sx={{ fontSize: '22px' }} variant="body1" component="p">
           {name}: {number}

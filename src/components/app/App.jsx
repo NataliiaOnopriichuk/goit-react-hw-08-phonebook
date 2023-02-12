@@ -1,14 +1,23 @@
 import { Layout } from 'components/Layout/Layout/Layout';
 import { tokenId } from 'http';
-import { Contacts } from 'pages/Contacts';
-import { Login } from 'pages/Login';
-import { Register } from 'pages/Register';
-import { useEffect } from 'react';
+import { lazy, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { getCurrentUser } from 'redux/Auth/operation.auth';
 import { selectorAuth } from 'redux/selectors';
 import { routes } from 'routes';
+
+const Contacts = lazy(() =>
+  import('../../pages/Contacts').then(module => ({ default: module.Contacts }))
+);
+
+const Register = lazy(() =>
+  import('../../pages/Register').then(module => ({ default: module.Register }))
+);
+
+const Login = lazy(() =>
+  import('../../pages/Login').then(module => ({ default: module.Login }))
+);
 
 export const App = () => {
   const { token, user } = useSelector(selectorAuth);

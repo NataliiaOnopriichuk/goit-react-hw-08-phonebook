@@ -10,22 +10,14 @@ import { routes } from 'routes';
 import { useSelector } from 'react-redux';
 import { selectorAuth } from 'redux/selectors';
 import { UserMenu } from 'components/UserMenu/UserMenu';
-import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@emotion/react';
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#183ea8',
-    },
-  },
-});
+import { navigationTheme } from './navigationTheme';
 
 function Navigation() {
   const { token, user } = useSelector(selectorAuth);
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={navigationTheme}>
       <AppBar position="static">
         <Container maxWidth="md">
           <Toolbar component="nav" disableGutters>
