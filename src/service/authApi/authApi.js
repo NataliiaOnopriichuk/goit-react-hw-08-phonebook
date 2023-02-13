@@ -1,4 +1,5 @@
-import { privateApi, publicApi} from "http";
+import { privateApi, publicApi } from "utils/http";
+
 
 export const registerUserApi = async body => {
   const { data } = await publicApi.post(

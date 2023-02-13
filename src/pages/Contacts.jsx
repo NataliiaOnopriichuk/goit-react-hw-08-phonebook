@@ -3,7 +3,6 @@ import { ContactForm } from 'components/ContactForm/ContactForm';
 import { ContactList } from 'components/ContactList/ContactList';
 import { Filter } from 'components/Filter/Filter';
 import { Loader } from 'components/Loader/Loader';
-import { tokenId } from 'http';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from 'redux/contacts/operation.contacts';
@@ -12,6 +11,7 @@ import {
   selectorContacts,
   selectorFilter,
 } from 'redux/selectors';
+import { tokenId } from 'utils/http';
 
 export const Contacts = () => {
   const dispatch = useDispatch();

@@ -25,21 +25,19 @@ const authSlice = createSlice({
         return {
           ...state,
           ...payload,
-          isAuth: true,
+    
         };
       })
       .addCase(loginUser.fulfilled, (state, { payload }) => {
         return {
           ...state,
           ...payload,
-          isAuth: true,
         };
       })
       .addCase(getCurrentUser.fulfilled, (state, { payload }) => {
         return {
           ...state,
           user: { ...payload },
-          isAuth: true,
         };
       })
       .addCase(logoutUser.fulfilled, () => {

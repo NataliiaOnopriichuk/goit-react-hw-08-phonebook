@@ -6,18 +6,18 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 import { Link } from 'react-router-dom';
-import { routes } from 'routes';
+import { routes } from 'utils/routes';
 import { useSelector } from 'react-redux';
 import { selectorAuth } from 'redux/selectors';
 import { UserMenu } from 'components/UserMenu/UserMenu';
 import { ThemeProvider } from '@emotion/react';
-import { navigationTheme } from './navigationTheme';
+import { headerTheme } from './headerTheme';
 
-function Navigation() {
+export const Header = () => {
   const { token, user } = useSelector(selectorAuth);
 
   return (
-    <ThemeProvider theme={navigationTheme}>
+    <ThemeProvider theme={headerTheme}>
       <AppBar position="static">
         <Container maxWidth="md">
           <Toolbar component="nav" disableGutters>
@@ -68,5 +68,4 @@ function Navigation() {
       </AppBar>
     </ThemeProvider>
   );
-}
-export default Navigation;
+};

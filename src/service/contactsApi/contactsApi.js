@@ -1,4 +1,5 @@
-import { privateApi } from 'http';
+import { privateApi } from "utils/http";
+
 
 export const getContacts = async (search) => {
   const { data } = await privateApi.get(

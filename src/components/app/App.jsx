@@ -1,11 +1,15 @@
 import { Layout } from 'components/Layout/Layout/Layout';
-import { tokenId } from 'http';
 import { lazy, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { getCurrentUser } from 'redux/Auth/operation.auth';
 import { selectorAuth } from 'redux/selectors';
-import { routes } from 'routes';
+import { tokenId } from 'utils/http';
+import { routes } from 'utils/routes';
+
+const Home = lazy(() =>
+  import('../../pages/Home').then(module => ({ default: module.Home }))
+);
 
 const Contacts = lazy(() =>
   import('../../pages/Contacts').then(module => ({ default: module.Contacts }))
@@ -33,7 +37,8 @@ export const App = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path={routes.HOME} element={<Layout />}>
+          <Route index element={<Home />} />
           {token ? (
             <Route path={routes.CONTACTS} element={<Contacts />} />
           ) : (
@@ -46,9 +51,9 @@ export const App = () => {
             path="*"
             element={
               token ? (
-                <Navigate to={routes.CONTACTS} />
+                <Navigate to={routes.HOME} />
               ) : (
-                <Navigate to={routes.LOGIN} />
+                <Navigate to={routes.HOME} />
               )
             }
           />

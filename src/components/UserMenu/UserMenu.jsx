@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { logoutUser } from 'redux/Auth/operation.auth';
 import { Box } from '@mui/system';
 import { Typography } from '@mui/material';
+import { resetContactState } from 'redux/contacts/cotactsSlice';
 
 export const UserMenu = ({ email }) => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ export const UserMenu = ({ email }) => {
       <Button
         onClick={() => {
           dispatch(logoutUser());
+          dispatch(resetContactState());
         }}
         sx={{
           color: 'white',
