@@ -1,8 +1,9 @@
-import { privateApi, publicApi } from "utils/http";
+import axios from "axios";
+
 
 
 export const registerUserApi = async body => {
-  const { data } = await publicApi.post(
+  const { data } = await axios.post(
     'users/signup',
     body
   );
@@ -10,7 +11,7 @@ export const registerUserApi = async body => {
 };
 
 export const loginUserApi = async body => {
-  const { data } = await publicApi.post(
+  const { data } = await axios.post(
     'users/login',
     body
   )
@@ -18,14 +19,14 @@ export const loginUserApi = async body => {
 };
 
 export const getCurrentUserApi = async () => {
-  const { data } = await privateApi.get(
+  const { data } = await axios.get(
     'users/current'
   );
   return data;
 };
 
 export const logoutApi = async () => {
-  const { data } = await privateApi.post(
+  const { data } = await axios.post(
     'users/logout'
   );
   return data;

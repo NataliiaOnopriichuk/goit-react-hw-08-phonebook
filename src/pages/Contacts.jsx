@@ -11,7 +11,7 @@ import {
   selectorContacts,
   selectorFilter,
 } from 'redux/selectors';
-import { tokenId } from 'utils/http';
+// import { tokenId } from 'utils/http';
 
 export const Contacts = () => {
   const dispatch = useDispatch();
@@ -20,10 +20,10 @@ export const Contacts = () => {
   const { token, user } = useSelector(selectorAuth);
 
   useEffect(() => {
-    if (token && user.email) {
-      tokenId.set(token);
-      dispatch(fetchContacts(search));
-    }
+    // if (token && user.email) {
+    //   // tokenId.set(token);
+    // }
+    dispatch(fetchContacts(search));
   }, [token, user.email, dispatch, search]);
 
   if (error) return <p>Download error</p>;

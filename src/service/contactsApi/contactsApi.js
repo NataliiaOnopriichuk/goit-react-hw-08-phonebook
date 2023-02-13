@@ -1,8 +1,8 @@
-import { privateApi } from "utils/http";
+import axios from "axios";
 
 
 export const getContacts = async (search) => {
-  const { data } = await privateApi.get(
+  const { data } = await axios.get(
     '/contacts',
     {
       params: { search },
@@ -12,7 +12,7 @@ export const getContacts = async (search) => {
 };
 
 export const addContactService = async body => {
-  const { data } = await privateApi.post(
+  const { data } = await axios.post(
     '/contacts',
     body
   );
@@ -20,7 +20,7 @@ export const addContactService = async body => {
 };
 
 export const deleteContactService = id => {
-  return privateApi.delete(
+  return axios.delete(
     '/contacts/' + id
   );
 };

@@ -2,15 +2,15 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectorAuth, selectorContacts } from 'redux/selectors';
+import { selectorContacts } from 'redux/selectors';
 import { addContact } from 'redux/contacts/operation.contacts';
 import { Alert, Button } from '@mui/material';
 import { useFormik } from 'formik';
 import { validationForm } from './validationForm';
-import { tokenId } from 'utils/http';
+// import { tokenId } from 'utils/http';
 
 export const ContactForm = memo(() => {
-  const { token, user } = useSelector(selectorAuth);
+  // const { token, user } = useSelector(selectorAuth);
   const dispatch = useDispatch();
   const stateContacts = useSelector(selectorContacts);
 
@@ -28,9 +28,9 @@ export const ContactForm = memo(() => {
         )
       )
         return alert(`${values.name} is already in contacts`);
-      if (token && user.email) {
-        tokenId.set(token);
-      }
+      // if (token && user.email) {
+      //   tokenId.set(token);
+      // }
       dispatch(addContact(values));
       formik.resetForm();
     },

@@ -12,23 +12,31 @@ import { selectorAuth } from 'redux/selectors';
 import { UserMenu } from 'components/UserMenu/UserMenu';
 import { ThemeProvider } from '@emotion/react';
 import { headerTheme } from './headerTheme';
+// import storage from 'redux-persist/lib/storage';
 
 export const Header = () => {
   const { token, user } = useSelector(selectorAuth);
+
+  // const savedSettings = storage.getItem('user');
+  // // const parsedSettings = JSON.parse(savedSettings);
+
+  // console.log('savedSettings :>> ', savedSettings);
 
   return (
     <ThemeProvider theme={headerTheme}>
       <AppBar position="static">
         <Container maxWidth="md">
           <Toolbar component="nav" disableGutters>
-            <ContactPhoneIcon
-              fontSize="large"
-              sx={{
-                display: { xs: 'none', md: 'flex' },
-                mr: 1,
-                color: '#95edff45',
-              }}
-            />
+            <Link to={routes.HOME}>
+              <ContactPhoneIcon
+                fontSize="large"
+                sx={{
+                  display: { xs: 'none', md: 'flex' },
+                  mr: 1,
+                  color: '#95edff45',
+                }}
+              />
+            </Link>
             <Box
               component="ul"
               sx={{

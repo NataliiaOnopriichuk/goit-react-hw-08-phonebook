@@ -1,14 +1,18 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import {  getCurrentUserApi, loginUserApi, logoutApi, registerUserApi } from 'service/authApi/authApi';
-import { tokenId } from 'utils/http';
-
+import {
+  getCurrentUserApi,
+  loginUserApi,
+  logoutApi,
+  registerUserApi,
+} from 'service/authApi/authApi';
+import { token } from 'utils/http';
 
 export const registerUser = createAsyncThunk(
   'auth/register',
   async (body, { rejectWithValue }) => {
     try {
-        const data = await registerUserApi(body);
-      tokenId.set(data.token);
+      const data = await registerUserApi(body);
+      token.set(data.token);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -21,7 +25,7 @@ export const loginUser = createAsyncThunk(
   async (body, { rejectWithValue }) => {
     try {
       const data = await loginUserApi(body);
-      tokenId.set(data.token);
+      token.set(data.token);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -30,10 +34,15 @@ export const loginUser = createAsyncThunk(
 );
 
 export const getCurrentUser = createAsyncThunk(
-  'user/getUser',
-  async (_, { rejectWithValue }) => {
+  'user/current',
+  async (_, { rejectWithValue, getState }) => {
+    const state = getState();
+    const persistedToken = state.auth.token;
+    if (persistedToken === null) return rejectWithValue();
+    token.set(persistedToken);
     try {
-      return await getCurrentUserApi();
+      const { data } = await getCurrentUserApi();
+      return data;
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -43,10 +52,10 @@ export const getCurrentUser = createAsyncThunk(
 export const logoutUser = createAsyncThunk(
   'user/logout',
   async (_, { rejectWithValue }) => {
-      try {
-          await logoutApi();
-        tokenId.unSet()
-      return 
+    try {
+      await logoutApi();
+      token.unset();
+      return;
     } catch (error) {
       return rejectWithValue(error);
     }

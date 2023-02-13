@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { getCurrentUser } from 'redux/Auth/operation.auth';
 import { selectorAuth } from 'redux/selectors';
-import { tokenId } from 'utils/http';
 import { routes } from 'utils/routes';
 
 const Home = lazy(() =>
@@ -24,15 +23,12 @@ const Login = lazy(() =>
 );
 
 export const App = () => {
-  const { token, user } = useSelector(selectorAuth);
+  const { token } = useSelector(selectorAuth);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (token && !user.email) {
-      tokenId.set(token);
-      dispatch(getCurrentUser());
-    }
-  }, [token, user.email, dispatch]);
+    dispatch(getCurrentUser());
+  }, [dispatch]);
 
   return (
     <>
@@ -47,16 +43,7 @@ export const App = () => {
               <Route path={routes.LOGIN} element={<Login />} />
             </>
           )}
-          <Route
-            path="*"
-            element={
-              token ? (
-                <Navigate to={routes.HOME} />
-              ) : (
-                <Navigate to={routes.HOME} />
-              )
-            }
-          />
+          <Route path="*" element={<Navigate to={routes.HOME} />} />
         </Route>
       </Routes>
     </>
