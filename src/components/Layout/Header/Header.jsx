@@ -12,15 +12,9 @@ import { selectorAuth } from 'redux/selectors';
 import { UserMenu } from 'components/UserMenu/UserMenu';
 import { ThemeProvider } from '@emotion/react';
 import { headerTheme } from './headerTheme';
-// import storage from 'redux-persist/lib/storage';
 
 export const Header = () => {
   const { token, user } = useSelector(selectorAuth);
-
-  // const savedSettings = storage.getItem('user');
-  // // const parsedSettings = JSON.parse(savedSettings);
-
-  // console.log('savedSettings :>> ', savedSettings);
 
   return (
     <ThemeProvider theme={headerTheme}>
